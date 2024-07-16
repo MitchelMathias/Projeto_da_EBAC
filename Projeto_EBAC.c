@@ -17,7 +17,6 @@ int consulta(){ // Função que verifica usuários
 	
 	if (ponteiro == NULL){ // se ponteiro == a nulo
 		printf("\nUsuário não cadastrado\n\n"); // Escreva que o usuário não foi cadastrado ainda
-		system("pause");// Pausa pro usuário ver a mensagem
 	}
 	else{ // se o ponteiro for encontrado 
 		while (fgets(conteudo,sizeof(conteudo), ponteiro) != NULL);{ // Enquanto a função ler fgets lê algo diferente de nulo armazene na varivável "conteudo"
@@ -28,13 +27,11 @@ int consulta(){ // Função que verifica usuários
 			printf("\nEssas são as informações do Usuário: \n"); // Mensagem pro usuário
 			printf("\nNome: %s %s",nome, sobrenome); // Escrevendo nome e então escrevendo a string no "%s" respectivamente
 			printf("\nCPF: %s", cpf); 
-			printf("\nEle é: %s", cargo);
-			printf("\n\n"); // Pulando duas linhas pra ficar menos poluido
-			system("pause"); // Pausando pro usuário ler as informações
+			printf("\nSeu Cargo: %s \n\n", cargo);
 		}
 	}
+	system("pause");// Pausa pro usuário ver a mensagem
 }
-
 int cadastro(){ // Função responsável por cadastrar usuários
 
 	setlocale(LC_ALL, "Portuguese"); // definindo o idioma (sinais, ç )
@@ -73,14 +70,41 @@ int cadastro(){ // Função responsável por cadastrar usuários
 	printf("\nUsuário cadastrado com sucesso!!\n\n"); // Pro usuário ver que foi cadastrado
 	system("pause"); // Pra não pular direto pro Menu 
 }
-
-int deletar(){ // Função responsável por deletar usuários
-	printf("Você escolheu Deletar um Usuário!!\n\n");
-	system("pause");
+int deletar() { // Função responsável por deletar usuários
+    setlocale(LC_ALL, "portuguese"); // Definindo idioma
+    
+    char cpf[12], nome[15], sobrenome[15], cargo[30], conteudo[72], cpf_busca[12], verificador[5]; // Declarando variáveis
+    
+    printf("Digite o CPF do usuário a ser deletado: "); //Mensagem pro usuário
+    scanf("%s", cpf_busca);// Guardando na variável "cpf_busca"
+    
+    FILE *ponteiro // Estrutura arquivo abrindo o caminho
+	ponteiro = fopen(cpf_busca, "r"); // Abrindo o cpf_busca
+    if (ponteiro == NULL) { // se não encontrar 
+        printf("Nenhum usuário cadastrado com esse CPF.\n"); // Mensagem pro usuário
+    }
+    
+    fscanf(ponteiro, "%s - %s - %s - %s", cpf, nome, sobrenome, cargo); // Lendo o arquivo e guardando nas respectivas variáveis
+    
+    printf("Confirme os dados do usuário...\n\n");// Mensagem pro usuário
+    printf("Nome: %s %s\n", nome, sobrenome); // Escreve justificadamente o conteudo das variáveis Nome e sobrenome 
+    printf("CPF: %s\n", cpf); // Escreve justificadamente o conteudo da variável cpf
+    printf("Cargo: %s\n", cargo); // Escreve justificadamente o conteudo da variável cargo
+    printf("Deseja excluir o usuário? [S/N] --> "); // Mensagem pro usuário
+    scanf("%s", verificador); // Verificador
+    
+    if (verificador[0] == 'S' || verificador[0] == 's') { // Se Verificador == 'S' ou 's' 
+        printf("Usuário deletado...\n\n"); // Mensagem pro usuário
+        fclose(ponteiro); // Fecha o arquivo no ponteiro
+        remove(cpf_busca); // Apaga o arquivo 
+    } else { // Se a resposta não for sim 
+        printf("Usuário não deletado...\n\n"); // Mensagem pro usuário
+        fclose(arquivo); // Fecha o arquivo
+    }
+    
+    system("pause"); // Pausa pro usuário ler a mensagem 
 }
-
-int main()
-{
+int main(){ // Função principal
 	char opcao[10];
 	int laco = 1; // Declarando a variável opção
 	
