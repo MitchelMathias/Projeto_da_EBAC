@@ -1,6 +1,6 @@
 #include <stdio.h> // Comunicação com o usuário
 #include <stdlib.h> // Alcoação de memória
-#include <locale.h> // Para definir a Região
+#include <locale.h> // Para definir o texto por região
 #include <string.h> // Responsável pelas strings
 
 
@@ -44,7 +44,7 @@ int consulta(){ // Função consulta
 int cadastro(){ // Função cadastro
 	setlocale(LC_ALL, "portuguese"); //Definindo o Idioma
 	
-	printf("Você escolheu Cadastrar usuário!!\n\n");
+	printf("Você escolheu Cadastrar usuário!!\n\n"); // Mensagem pro usuário
 	
 	char cpf[12], nome[15], sobrenome[15], cargo[30]; //Declarando Variáveis tipo string caracter
 	int cont = 1; //Declarando Variáveis tipo inteiro
@@ -64,7 +64,7 @@ int cadastro(){ // Função cadastro
 	scanf("%s", cargo ); // Guardando o dado na variável cargo 
 	
 	FILE *arquivo; // Acesse a estrutura FILE e atribua o caminho na varivel arquivo
-	arquivo = fopen("cadastros.txt", "a"); // abra o arquivo do caminho arquivo
+	arquivo = fopen("cadastros.txt", "a"); // abra o arquivo do caminho arquivo e atualiza ou cria o arquivo
 	
 	if (arquivo == NULL){ // se arquivo == a NULL
 		printf("Erro ao abrir o arquivo"); // Mensagem pro usuário
