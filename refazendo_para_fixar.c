@@ -145,6 +145,7 @@ int main() { // Função principal onde puxa as outras funções
         printf("\t1 - Consultar cadastros\n"); // Início das opções
         printf("\t2 - Cadastrar Usuário\n");
         printf("\t3 - Deletar Usuário\n"); // fim das opções 
+        printf("\t4 - Sair do sistema\n"); // Sai do programa
         printf("\nSua Opção: "); // Mensagem para o usuário
 
         // Lê a entrada do usuário e verifica se foi um número inteiro
@@ -168,11 +169,16 @@ int main() { // Função principal onde puxa as outras funções
             case 3:
                 deletar();
                 break; // Interrompe a execução da estrutura
+            case 4:
+            	printf("Obrigado por usar nosso sistema!!\n"); // Mensagem pro usuário
+				return 0; // Retorna que não teve erro
+            	break; // para
             default: // Serve como else
                 printf("Opção Inválida!!\n"); // Mensagem para o usuário
                 system("pause"); // Pausa para o usuário ler a mensagem 
                 break; // Interrompe a execução da estrutura
         }
+    system("Pause");
     }
 }
 
