@@ -5,11 +5,11 @@
 
 int consulta() { // Função consulta
     setlocale(LC_ALL, "portuguese"); // Definindo o Idioma
-
-    printf("Você escolheu Consultar um usuário!!\n\n");
-    
+   
     char repeticao [2];
     do {
+    	printf("Você escolheu Consultar um usuário!!\n\n");
+    	
 	    char cpf[12], nome[15], sobrenome[15], cargo[30], conteudo[72], cpf_busca[12]; // Declarando Variáveis
 	
 	    printf("Digite o CPF: "); // Mensagem para o usuário 
@@ -45,6 +45,8 @@ int consulta() { // Função consulta
 		    scanf("%s", repeticao );
 		    printf("\n");
 		} while(repeticao[0] != 'S' && repeticao[0] != 's' && repeticao[0] != 'N' && repeticao[0] != 'n');
+	
+		system("cls");
 	}while (repeticao[0] == 'S' || repeticao[0] == 's' );
 	return 0;
 }
@@ -55,7 +57,7 @@ int cadastro() { // Função cadastro
     printf("Você escolheu Cadastrar usuário!!\n\n"); // Mensagem para o usuário
 	
 	char repeticao [2];
-	int continua_cadastro = 1;
+	int continua_repeticao = 1;
 		
 	do {
 	    char cpf[12], nome[15], sobrenome[15], cargo[30], cpf_busca[12], conteudo[72]; // Declarando Variáveis tipo string caracter
@@ -89,17 +91,19 @@ int cadastro() { // Função cadastro
 			printf("\n\nEscolha uma das opções abaixo:\n\n");
             printf("\t1 - Deletar registro\n");
             printf("\t2 - Cancelar\n");
-            printf("\tEscolha uma opção -->  ");
+            printf("\t\nEscolha uma opção -->  ");
             scanf("%d", &opcao);
             
             switch(opcao){
             	case 1:
+            		system("cls");
             		deletar();
             		break;
             	case 2:
-            		continua_cadastro = 0;
+            		system("cls");
             		break;
             	default:
+            		system("cls");
             		printf("Opção inválida!!!\n");
             		break;
 			}
@@ -130,12 +134,12 @@ int cadastro() { // Função cadastro
 			    printf("\n");
 			} while(repeticao[0] != 'S' && repeticao[0] != 's' && repeticao[0] != 'N' && repeticao[0] != 'n');
 			
-			if (repeticao[0] == 's' || repeticao[0] == 'S'){
-				continua_cadastro = 0; 
-			}
-			
+			if (repeticao[0] != 'S' && repeticao[0] != 's'){
+				continua_repeticao = 0;
+			}	
 		}
-	}while (continua_cadastro == 1);
+		system("cls");
+	}while (continua_repeticao == 1 );
 	return 0;
 }
 
@@ -161,7 +165,7 @@ int deletar() { // Função deletar
 	        fclose(arquivo); // Fecha o arquivo 
 	    }
 	    int encontrado = 0; // Declarando variáveis 
-	    char verificador[10]; // Declarando variáveis 
+	    char verificador[2]; // Declarando variáveis 
 	
 	    while (fgets(conteudo, sizeof(conteudo), arquivo) != NULL) { // Lê cada linha do arquivo e armazena em 'conteudo' até o tamanho de 'conteudo' ou até encontrar uma nova linha
 	        sscanf(conteudo, "%s - %s - %s - %s", cpf, nome, sobrenome, cargo); // Extrai quatro strings de 'conteudo' separadas por " - "
@@ -176,13 +180,12 @@ int deletar() { // Função deletar
 	            scanf("%s", verificador); // Guarda a resposta na variável verificador
 	            if (verificador[0] == 'S' || verificador[0] == 's') { // se verificador na posição 0 for igual a "s" ou "S" 
 	                printf("\nUsuário deletado\n\n"); // escreva usuário deletado
+	                continue;
 	            } else {
 	                printf("\nUsuário não deletado\n\n"); // Se for diferente da condição acima, print usuário não deletado
 	            }
 	        }
-	        if (verificador[0] != 'S' && verificador[0] != 's') { // Se verificador for diferente de 'S' e 's'
-	            fprintf(temp, "%s - %s - %s - %s\n", cpf, nome, sobrenome, cargo); // escreva dentro do arquivo temp de forma justificada cpf, nome, sobrenome, cargo, separados por um " - " 
-	        }
+	        fprintf(temp, "%s - %s - %s - %s\n", cpf, nome, sobrenome, cargo); // escreva dentro do arquivo temp de forma justificada cpf, nome, sobrenome, cargo, separados por um " - " 
 	    }
 	    if (encontrado == 0) { // se o usuário não for encontrado 
 	        printf("\nUsuário não cadastrado !!... \n\n"); // Mensagem para o usuário
@@ -195,6 +198,8 @@ int deletar() { // Função deletar
 	    
 		printf("Quer deletar mais Algum usuário? [S/N]--> ");
 		scanf("%s", repeticao);
+		
+		system("cls");
 	    
 	} while (repeticao[0] == 's' || repeticao[0] == 'S');
 }
