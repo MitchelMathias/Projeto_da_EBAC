@@ -17,10 +17,10 @@ int consulta() { // Função consulta
 	
 	    FILE *arquivo; // Acesse a estrutura FILE e atribua o caminho na variável arquivo
 	    arquivo = fopen("cadastros.txt", "r"); // abra o arquivo cadastros em txt e leia
-	
 	    if (arquivo == NULL) { // se arquivo não encontrado 
-	        printf("Usuário não encontrado!!\n\n"); // Mensagem para o usuário se o arquivo não foi encontrado é porque não teve usuário cadastrado 
+	    	printf("Nenhum usuário cadastrado...\n");
 	    }
+	    
 	    int cpf_encontrado = 0; // declarando variável para corrigir o erro de repetição de usuário não cadastrado
 	
 	    while (fgets(conteudo, sizeof(conteudo), arquivo) != NULL) { // Lê cada linha do arquivo e armazena em 'conteudo' até o tamanho de 'conteudo' ou até encontrar uma nova linha
@@ -32,7 +32,7 @@ int consulta() { // Função consulta
 	            printf("Cpf: %s\n", cpf); // Escreva Cpf e depois o dado guardado em cpf 
 	            printf("Cargo: %s\n\n", cargo); // Escreva Cargo e depois o dado guardado em cargo 
 	            cpf_encontrado = 1;
-	            break; // para para não fazer isso com todas as linhas no arquivo cadastro.txt
+	            break;
 	        }
 	    }
 	
@@ -40,8 +40,11 @@ int consulta() { // Função consulta
 	        printf("\nUsuário não cadastrado!!...\n\n"); // Caso não encontrou o CPF
 	    }
 	    fclose(arquivo);
-	    printf("Quer consultar mais 1 usuário? [S/N] --> ");
-	    scanf("%s", repeticao );
+	    do {
+		    printf("Quer consultar mais 1 usuário? [S/N] --> ");
+		    scanf("%s", repeticao );
+		    printf("\n");
+		} while(repeticao[0] != 'S' && repeticao[0] != 's' && repeticao[0] != 'N' && repeticao[0] != 'n');
 	}while (repeticao[0] == 'S' || repeticao[0] == 's' );
 	return 0;
 }
@@ -52,41 +55,87 @@ int cadastro() { // Função cadastro
     printf("Você escolheu Cadastrar usuário!!\n\n"); // Mensagem para o usuário
 	
 	char repeticao [2];
-	
+	int continua_cadastro = 1;
+		
 	do {
 	    char cpf[12], nome[15], sobrenome[15], cargo[30], cpf_busca[12], conteudo[72]; // Declarando Variáveis tipo string caracter
-	    int cont = 1, cpf_encontrado; // Declarando Variáveis tipo inteiro
+	    int opcao = 1, cpf_encontrado = 0; // Declarando Variáveis tipo inteiro
 	    
 	    FILE *arquivo; // Acesse a estrutura FILE e atribua o caminho na variável arquivo
-	    arquivo = fopen("cadastros.txt", "a"); // abra o arquivo do caminho arquivo e atualiza ou cria o arquivo
-	
+	    arquivo = fopen("cadastros.txt", "r"); // abra o arquivo do caminho arquivo e atualiza ou cria o arquivo
+	    if (arquivo == NULL) { // se arquivo == a NULL
+	        printf(""); // Mensagem para o usuário
+	    }
+		
 	    printf("Vamos Começar!!!\n\n"); // Mensagem para o usuário
 	
 	    printf("Digite o CPF: "); // Mensagem para o usuário
 	    scanf("%s", cpf); // Guardando o dado na variável CPF 
-	
-		printf("Nome: "); // Mensagem para o usuário
-	    scanf("%s", nome); // Guardando o dado na variável nome 
-	
-	    printf("Sobrenome: "); // Mensagem para o usuário
-	    scanf("%s", sobrenome); // Guardando o dado na variável sobrenome 
-	
-	    printf("Cargo: "); // Mensagem para o usuário
-	    scanf("%s", cargo); // Guardando o dado na variável cargo 
-	
-	    if (arquivo == NULL) { // se arquivo == a NULL
-	        printf("Erro ao abrir o arquivo"); // Mensagem para o usuário
-	        system("pause"); // Para o usuário ver a mensagem
-	    } else { // se diferente de NULL
-	    	
-	        fprintf(arquivo, "%s - %s - %s - %s\n", cpf, nome, sobrenome, cargo); // Escreva dentro de arquivo o cpf, nome, sobrenome e cargo separados por um "-" e depois pule uma linha
-	        fclose(arquivo); // Fecha o arquivo
-	    }
-	    printf("\nUsuário Cadastrado !!! \n\n"); // Mensagem para o usuário
 	    
-	    printf("Quer consultar mais 1 usuário? [S/N]--> ");
-	    scanf("%s", repeticao );
-	}while (repeticao[0] == 'S' || repeticao[0] == 's' );
+	    strcpy(cpf_busca, cpf);
+	    
+	    while(fgets(conteudo, sizeof(conteudo), arquivo) != NULL){
+	    	sscanf(conteudo, "%s - %s - %s -%s", cpf, nome, sobrenome, cargo);
+	    	
+	    	if (strcmp(cpf,cpf_busca) == 0){
+	    		printf("\nja tem um usuário cadastrado com esse CPF!!");
+	    		cpf_encontrado += 1;
+	    		break;
+			}
+		}
+		fclose(arquivo);
+		
+		if (cpf_encontrado >= 1){
+			printf("\n\nEscolha uma das opções abaixo:\n\n");
+            printf("\t1 - Deletar registro\n");
+            printf("\t2 - Cancelar\n");
+            printf("\tEscolha uma opção -->  ");
+            scanf("%d", &opcao);
+            
+            switch(opcao){
+            	case 1:
+            		deletar();
+            		break;
+            	case 2:
+            		continua_cadastro = 0;
+            		break;
+            	default:
+            		printf("Opção inválida!!!\n");
+            		break;
+			}
+		}
+		else{
+			arquivo = fopen("cadastros.txt", "a");
+			if(arquivo == NULL){
+				printf("Erro ao abrir o arquivo!!\n");
+			}
+			
+			printf("Nome: "); // Mensagem para o usuário
+		    scanf("%s", nome); // Guardando o dado na variável nome 
+		
+		    printf("Sobrenome: "); // Mensagem para o usuário
+		    scanf("%s", sobrenome); // Guardando o dado na variável sobrenome 
+		
+		    printf("Cargo: "); // Mensagem para o usuário
+		    scanf("%s", cargo); // Guardando o dado na variável cargo 
+		    
+		    fprintf(arquivo, "%s - %s - %s - %s\n", cpf_busca, nome, sobrenome, cargo);
+		    fclose(arquivo);
+		    
+		    printf("\nUsuário cadastrado com sucesso!!");
+			
+			do {
+			    printf("\nQuer cadastrar mais 1 usuário? [S/N] --> ");
+			    scanf("%s", repeticao );
+			    printf("\n");
+			} while(repeticao[0] != 'S' && repeticao[0] != 's' && repeticao[0] != 'N' && repeticao[0] != 'n');
+			
+			if (repeticao[0] == 's' || repeticao[0] == 'S'){
+				continua_cadastro = 0; 
+			}
+			
+		}
+	}while (continua_cadastro == 1);
 	return 0;
 }
 
