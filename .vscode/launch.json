@@ -1,6 +1,7 @@
 {
   "version": "0.2.0",
   "configurations": [
+    
     {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
@@ -10,14 +11,15 @@
       "externalConsole": true,
       "cwd": "c:/Users/mitch/OneDrive/Desktop/C++_Projeto/Projeto_EBAC",
       "program": "c:/Users/mitch/OneDrive/Desktop/C++_Projeto/Projeto_EBAC/build/Debug/outDebug",
-      "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
+      "MIMode": "gbd",
+      "miDebuggerPath": "gbd",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",
           "text": "-enable-pretty-printing",
           "ignoreFailures": true
-        }
+        },
+
       ]
     }
   ]

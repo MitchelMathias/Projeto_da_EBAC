@@ -220,11 +220,11 @@ int main() { // Função principal onde puxa as outras funções
 
     if (strcmp(senha, "admin") == 0 || strcmp(login, "admin") == 0) {
         printf("Acessando o Sistema...");
-        printf("1..");
+        printf("3..");
         Sleep(300);
         printf("2..");
         Sleep(300);
-        printf("3..");
+        printf("1..");
         Sleep(300);
 
         while (repeticao == 1) { // Enquanto repeticao == 1 
