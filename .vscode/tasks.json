@@ -1,37 +1,5 @@
 {
-    "version": "2.0.0",
     "tasks": [
-        {
-            "label": "build",
-            "type": "shell",
-            "command": "C:/MinGW/bin/gcc.exe",
-            "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
-            ],
-            "group": "build",
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "detail": "Compiling C file"
-        },
-        {
-            "label": "run",
-            "type": "shell",
-            "command": "powershell",
-            "args": [
-                "-Command",
-                "Start-Process",
-                "C:/Users/mitch/OneDrive/Desktop/C++_Projeto/Projeto_EBAC/${fileBasenameNoExtension}.exe",
-                "-NoNewWindow"
-            ],
-            "dependsOn": "build",
-            "group": "build",
-            "problemMatcher": []
-        },
         {
             "type": "cppbuild",
             "label": "C/C++: gcc.exe arquivo de build ativo",
@@ -56,5 +24,6 @@
             },
             "detail": "Tarefa gerada pelo Depurador."
         }
-    ]
+    ],
+    "version": "2.0.0"
 }
