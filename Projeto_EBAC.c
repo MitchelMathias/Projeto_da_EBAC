@@ -161,9 +161,11 @@ int cadastro() { // Função cadastro
                 case 1: // Opção 1
                     system("cls"); // Limpa tela
                     deletar(); // Chama a função deletar
+                    return 0;
                     break; 
                 case 2: // Opção 2
                     system("cls"); // Limpa a tela e não faz nada demais 
+                    return 0;
                     break;
                 default: // Caso contrário 
                     system("cls"); // Limpa tela
@@ -210,7 +212,7 @@ int main() { // Função principal onde puxa as outras funções
 
     int opcao; // Declarando variável tipo inteiro
     int repeticao = 1; // Declarando variável tipo inteiro
-    char login[35] = "", senha[15] = "";
+    char login[] = " ", senha[] = " ";
 
     printf("=============== Cartório EBAC ===============\n");
     printf("\tLogin: ");
