@@ -3,12 +3,11 @@
 #include <locale.h> // Para definir o texto por região
 #include <string.h> // Responsável pelas strings
 #include <windows.h> // Nesse Programa estou usando a função sleep
-//
+
 int consulta() { // Função consulta
     setlocale(LC_ALL, "portuguese"); // Definindo o Idioma
     
     char cpf[12], nome[15], sobrenome[15], cargo[30], conteudo[72], cpf_busca[12]; // Declarando Variáveis
-   
     char repeticao[2]; // Declarando variável
     do { // faça enquanto a condição for verdadeira
         printf("Você escolheu Consultar um usuário!!\n\n"); // Mensagem para o usuário 
