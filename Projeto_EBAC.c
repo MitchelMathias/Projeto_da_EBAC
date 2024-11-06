@@ -12,7 +12,7 @@ int consulta() { // Função consulta
     do { // faça enquanto a condição for verdadeira
         printf("Você escolheu Consultar um usuário!!\n\n"); // Mensagem para o usuário 
         printf("Digite o CPF: "); // Mensagem para o usuário 
-        scanf("%s", cpf_busca); // Guarda a entrada na variável cpf_busca
+        scanf("%s", cpf_busca) // Guarda a entrada na variável cpf_busca
     
         FILE *arquivo; // Acesse a estrutura FILE e atribua o caminho na variável arquivo
         arquivo = fopen("cadastros.txt", "r"); // Abra o arquivo cadastros em txt e leia
