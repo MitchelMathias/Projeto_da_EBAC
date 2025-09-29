@@ -1,5 +1,2 @@
-024 - Mitchel - Mathias - Dev
-1 - Mitchel - Mathias - DEV
-2 - Mitchel - Mathias - DEV
-89 - Larissa - Rodrigues - Marketeira
-3 - Mitchel - Mathias - DEV
+0294 - Mathias - dev - sla
+022 - GIGI - dev - sla
